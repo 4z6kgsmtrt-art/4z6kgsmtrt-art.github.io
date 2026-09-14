@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>N3 語法精讀 — 返品された箱に、注文していない手紙が入っていた</title>
+<style>
+  :root {
+    --red: #d94f4f;
+    --ink: #2b2b2b;
+    --muted: #6b6b6b;
+    --border: #e8e2da;
+    --paper: #fffdf9;
+    --accent-bg: #fbeeee;
+    --vocab: #155db2;
+    --vocab-bg: #e7f1ff;
+    --grammar: #146b3a;
+    --grammar-bg: #e5f4e9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #efe9df;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+  .card {
+    width: 100%;
+    max-width: 1000px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+  }
+  .header {
+    background: var(--red);
+    color: white;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 14px 22px;
+  }
+  .header .badge { font-weight: 700; font-size: 15px; letter-spacing: 1px; }
+  .header .subtitle { font-size: 20px; font-weight: 700; }
+  .header .tag { font-size: 12px; opacity: 0.85; }
+  .audio-bar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 22px; background: var(--accent-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .audio-bar span.label {
+    font-size: 13px; color: var(--muted);
+    font-family: "PingFang TC", "Noto Sans TC", sans-serif; white-space: nowrap;
+  }
+  audio { flex: 1; height: 34px; }
+  .body-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 0; }
+  .passage { padding: 22px 24px; border-right: 1px solid var(--border); line-height: 2.4; font-size: 16px; }
+  .passage p { margin: 0 0 18px 0; }
+  ruby rt { font-size: 10px; color: var(--muted); font-family: "Noto Sans JP", sans-serif; }
+  .vocab-highlight { color: var(--vocab); background: var(--vocab-bg); border-radius: 3px; padding: 0 2px; }
+  .grammar-highlight { color: var(--grammar); background: var(--grammar-bg); border-radius: 3px; padding: 0 2px; font-weight: 700; }
+  .side { padding: 20px; background: #fdfcf9; }
+  .section-title {
+    color: var(--red); font-weight: 700; font-size: 15px;
+    font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+    border-bottom: 2px solid var(--red); padding-bottom: 6px;
+    margin-bottom: 12px; margin-top: 0;
+  }
+  .vocab-item { font-size: 13.5px; line-height: 1.6; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed var(--border); }
+  .v-word { font-weight: 700; font-size: 15px; }
+  .v-pos { color: var(--muted); font-family: "PingFang TC", "Noto Sans TC", sans-serif; font-size: 11px; }
+  .v-reading { color: #888; font-size: 12px; }
+  .v-meaning { font-family: "PingFang TC", "Noto Sans TC", sans-serif; font-size: 13px; }
+  .grammar-section { grid-column: 1 / -1; padding: 20px 24px; border-top: 1px solid var(--border); font-family: "PingFang TC", "Noto Sans TC", sans-serif; }
+  .g-item { margin-bottom: 16px; padding: 12px 14px; background: #faf7f2; border-left: 3px solid var(--red); }
+  .g-title { font-weight: 700; font-size: 14.5px; margin-bottom: 6px; }
+  .g-line { font-size: 13px; margin-bottom: 3px; line-height: 1.6; }
+  .g-label { color: var(--red); font-weight: 700; }
+  .g-note { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.6; }
+  .translation-section { grid-column: 1 / -1; padding: 20px 24px; border-top: 1px solid var(--border); background: #f6f3ed; font-family: "PingFang TC", "Noto Sans TC", sans-serif; }
+  .translation-section p { font-size: 14px; line-height: 2.1; white-space: pre-line; margin: 0; }
+  .footer { text-align: center; padding: 10px; font-size: 11px; color: var(--muted); font-family: "PingFang TC", "Noto Sans TC", sans-serif; border-top: 1px solid var(--border); }
+  @media (max-width: 720px) {
+    .body-grid { grid-template-columns: 1fr; }
+    .passage { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="badge">N3 語法精讀</div>
+    <div class="subtitle">返品された箱に、注文していない手紙が入っていた</div>
+    <div class="tag">（文法 1–6：複合動詞・間接指示・推測）</div>
+  </div>
+
+  <div class="body-grid">
+    <div class="passage">
+      
+<p><ruby>通信販売<rt>つうしんはんばい</rt></ruby><ruby>会社<rt>がいしゃ</rt></ruby>で<ruby>働<rt>はたら</rt></ruby>き<span class="grammar-highlight"><ruby>始<rt>はじ</rt></ruby>めて</span><ruby>三日目<rt>みっかめ</rt></ruby>、「<ruby>お客様都合<rt>おきゃくさまつごう</rt></ruby>」で<ruby>返品<rt>へんぴん</rt></ruby>された<span class="vocab-highlight"><ruby>新型<rt>しんがた</rt></ruby></span>の<ruby>炊飯器<rt>すいはんき</rt></ruby>が<ruby>届<rt>とど</rt></ruby>いた。<ruby>私<rt>わたし</rt></ruby>は、<ruby>箱<rt>はこ</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>するだけなら<span class="grammar-highlight"><ruby>簡単<rt>かんたん</rt></ruby>だろうと<ruby>思<rt>おも</rt></ruby>っていた</span>。ところが、ふたを<span class="grammar-highlight"><ruby>開<rt>あ</rt></ruby>けると</span>、<ruby>商品<rt>しょうひん</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>に「これは<ruby>私<rt>わたし</rt></ruby>が<ruby>注文<rt>ちゅうもん</rt></ruby>した<ruby>品<rt>しな</rt></ruby>ではありません」という<ruby>手紙<rt>てがみ</rt></ruby>が<ruby>入<rt>はい</rt></ruby>っていた。</p>
+<p><ruby>上司<rt>じょうし</rt></ruby>は<ruby>私<rt>わたし</rt></ruby>に、まず<span class="vocab-highlight"><ruby>申込書<rt>もうしこみしょ</rt></ruby></span>の<ruby>注文番号<rt>ちゅうもんばんごう</rt></ruby>と<ruby>配送先<rt>はいそうさき</rt></ruby>を<span class="grammar-highlight"><ruby>確認<rt>かくにん</rt></ruby>するように<ruby>言<rt>い</rt></ruby>った</span>。そして、<ruby>原因<rt>げんいん</rt></ruby>がわかるまでは<ruby>返品<rt>へんぴん</rt></ruby>した<ruby>客<rt>きゃく</rt></ruby>に<span class="grammar-highlight"><ruby>連絡<rt>れんらく</rt></ruby>しないように<ruby>頼<rt>たの</rt></ruby>んだ</span>。<ruby>倉庫<rt>そうこ</rt></ruby>の<ruby>端末<rt>たんまつ</rt></ruby>を<ruby>調<rt>しら</rt></ruby>べると、「<ruby>同<rt>おな</rt></ruby>じ<ruby>注文番号<rt>ちゅうもんばんごう</rt></ruby>の<ruby>箱<rt>はこ</rt></ruby>がもう<ruby>一<rt>ひと</rt></ruby>つある<span class="grammar-highlight">という<ruby>記録<rt>きろく</rt></ruby></span>が<ruby>残<rt>のこ</rt></ruby>っていた。</p>
+<p><ruby>私<rt>わたし</rt></ruby>は<ruby>棚<rt>たな</rt></ruby>の<ruby>番号<rt>ばんごう</rt></ruby>を<ruby>追<rt>お</rt></ruby>い、<span class="vocab-highlight"><ruby>小型<rt>こがた</rt></ruby></span>の<ruby>箱<rt>はこ</rt></ruby>を<ruby>動<rt>うご</rt></ruby>かし<span class="grammar-highlight"><ruby>終<rt>お</rt></ruby>えた</span>。しかし、<ruby>奥<rt>おく</rt></ruby>にあったのは<ruby>胸<rt>むね</rt></ruby>まである<span class="vocab-highlight"><ruby>大型<rt>おおがた</rt></ruby></span>の<ruby>箱<rt>はこ</rt></ruby>だった。<ruby>一人<rt>ひとり</rt></ruby>では<span class="grammar-highlight"><ruby>運<rt>はこ</rt></ruby>べそうもない</span>。<ruby>先輩<rt>せんぱい</rt></ruby>に<ruby>手伝<rt>てつだ</rt></ruby>ってもらい、<ruby>床<rt>ゆか</rt></ruby>へ<ruby>下<rt>お</rt></ruby>ろした。<ruby>開<rt>あ</rt></ruby>けてみると、<ruby>中<rt>なか</rt></ruby>にあったのは<ruby>炊飯器<rt>すいはんき</rt></ruby>ではなく、<ruby>宣伝用<rt>せんでんよう</rt></ruby>の<span class="vocab-highlight"><ruby>米<rt>こめ</rt></ruby></span>と<ruby>会社<rt>かいしゃ</rt></ruby>のマスコット<ruby>着ぐるみ<rt>きぐるみ</rt></ruby>だった。</p>
+<p><ruby>倉庫<rt>そうこ</rt></ruby>の<ruby>担当者<rt>たんとうしゃ</rt></ruby>が<ruby>注文<rt>ちゅうもん</rt></ruby>のラベルを<ruby>貼<rt>は</rt></ruby>り<ruby>間違<rt>まちが</rt></ruby>えていたのだ。「<ruby>新人<rt>しんじん</rt></ruby>さんが<ruby>見<rt>み</rt></ruby>つけてくれたんですか」と<ruby>上司<rt>じょうし</rt></ruby>は<ruby>笑<rt>わら</rt></ruby>った。<ruby>私<rt>わたし</rt></ruby>は<ruby>簡単<rt>かんたん</rt></ruby>だと<ruby>思<rt>おも</rt></ruby>っていた<ruby>初日<rt>しょにち</rt></ruby>の<ruby>仕事<rt>しごと</rt></ruby>を<ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>だ</rt></ruby>し、つられて<ruby>笑<rt>わら</rt></ruby>った。</p>
+
+    </div>
+    <div class="side">
+      <div class="section-title">重點詞彙與表達</div>
+      <div class="vocab-item"><span class="v-word">・米国</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">べいこく</span>　<span class="v-meaning">美國 / America</span></div>
+<div class="vocab-item"><span class="v-word">・米</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">こめ</span>　<span class="v-meaning">稻米 / rice</span></div>
+<div class="vocab-item"><span class="v-word">・高級</span> <span class="v-pos">[な形・名詞]</span><br><span class="v-reading">こうきゅう</span>　<span class="v-meaning">高級 / high-class</span></div>
+<div class="vocab-item"><span class="v-word">・上級</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">じょうきゅう</span>　<span class="v-meaning">高級、上級 / advanced level</span></div>
+<div class="vocab-item"><span class="v-word">・中級</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">ちゅうきゅう</span>　<span class="v-meaning">中級 / intermediate level</span></div>
+<div class="vocab-item"><span class="v-word">・残業</span> <span class="v-pos">[名詞・サ變]</span><br><span class="v-reading">ざんぎょう</span>　<span class="v-meaning">加班 / overtime</span></div>
+<div class="vocab-item"><span class="v-word">・残る</span> <span class="v-pos">[自五段]</span><br><span class="v-reading">のこる</span>　<span class="v-meaning">剩餘 / to remain</span></div>
+<div class="vocab-item"><span class="v-word">・残す</span> <span class="v-pos">[他五段]</span><br><span class="v-reading">のこす</span>　<span class="v-meaning">留下 / to leave behind</span></div>
+<div class="vocab-item"><span class="v-word">・大型</span> <span class="v-pos">[名詞・な形]</span><br><span class="v-reading">おおがた</span>　<span class="v-meaning">大型 / large-scale</span></div>
+<div class="vocab-item"><span class="v-word">・新型</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">しんがた</span>　<span class="v-meaning">新型 / new model</span></div>
+<div class="vocab-item"><span class="v-word">・小型</span> <span class="v-pos">[名詞・な形]</span><br><span class="v-reading">こがた</span>　<span class="v-meaning">小型 / small-scale</span></div>
+<div class="vocab-item"><span class="v-word">・消費税</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">しょうひぜい</span>　<span class="v-meaning">消費稅 / consumption tax</span></div>
+<div class="vocab-item"><span class="v-word">・税金</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">ぜいきん</span>　<span class="v-meaning">稅金 / tax</span></div>
+<div class="vocab-item"><span class="v-word">・込む</span> <span class="v-pos">[自五段]</span><br><span class="v-reading">こむ</span>　<span class="v-meaning">擁擠、進入 / to be crowded</span></div>
+<div class="vocab-item"><span class="v-word">・振り込む</span> <span class="v-pos">[他五段]</span><br><span class="v-reading">ふりこむ</span>　<span class="v-meaning">匯款 / to transfer money</span></div>
+<div class="vocab-item"><span class="v-word">・税込</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">ぜいこみ</span>　<span class="v-meaning">含稅 / tax included</span></div>
+<div class="vocab-item"><span class="v-word">・価格</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">かかく</span>　<span class="v-meaning">價格 / price</span></div>
+<div class="vocab-item"><span class="v-word">・定価</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">ていか</span>　<span class="v-meaning">定價 / list price</span></div>
+<div class="vocab-item"><span class="v-word">・合格</span> <span class="v-pos">[名詞・サ變]</span><br><span class="v-reading">ごうかく</span>　<span class="v-meaning">合格 / to pass an exam</span></div>
+<div class="vocab-item"><span class="v-word">・格安</span> <span class="v-pos">[名詞・な形]</span><br><span class="v-reading">かくやす</span>　<span class="v-meaning">特別便宜 / bargain price</span></div>
+<div class="vocab-item"><span class="v-word">・申す</span> <span class="v-pos">[他五段]</span><br><span class="v-reading">もうす</span>　<span class="v-meaning">說、叫作（謙讓語） / to say</span></div>
+<div class="vocab-item"><span class="v-word">・申込書</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">もうしこみしょ</span>　<span class="v-meaning">申請書 / application form</span></div>
+<div class="vocab-item"><span class="v-word">・申し上げる</span> <span class="v-pos">[他一段]</span><br><span class="v-reading">もうしあげる</span>　<span class="v-meaning">說（謙讓語） / to say</span></div>
+<div class="vocab-item"><span class="v-word">・記入</span> <span class="v-pos">[名詞・サ變]</span><br><span class="v-reading">きにゅう</span>　<span class="v-meaning">填入 / to fill in</span></div>
+<div class="vocab-item"><span class="v-word">・記号</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">きごう</span>　<span class="v-meaning">記號 / symbol</span></div>
+<div class="vocab-item"><span class="v-word">・記事</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">きじ</span>　<span class="v-meaning">報導 / article</span></div>
+<div class="vocab-item"><span class="v-word">・年齢</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">ねんれい</span>　<span class="v-meaning">年齡 / age</span></div>
+<div class="vocab-item"><span class="v-word">・性別</span> <span class="v-pos">[名詞]</span><br><span class="v-reading">せいべつ</span>　<span class="v-meaning">性別 / gender</span></div>
+    </div>
+
+    <div class="grammar-section">
+      <div class="section-title">語法深度解析</div>
+      <div class="g-item">
+    <div class="g-title">1. 動詞ます形＋始める／終わる（終える）</div>
+    <div class="g-line"><span class="g-label">【接續】</span>動詞ます形語幹＋始める／終わる・終える</div>
+    <div class="g-line"><span class="g-label">【含義】</span>開始或完成某動作</div>
+    <div class="g-note">※ 本文用「働き始めて」「動かし終えた」。</div>
+    </div>
+<div class="g-item">
+    <div class="g-title">2. 普通形／ない形＋ように言う・頼む</div>
+    <div class="g-line"><span class="g-label">【接續】</span>普通形／ない形＋ように＋言う・頼む・注意する・伝える</div>
+    <div class="g-line"><span class="g-label">【含義】</span>間接轉述指示、要求或提醒</div>
+    <div class="g-note">※ 本文用「確認するように言った」「連絡しないように頼んだ」。</div>
+    </div>
+<div class="g-item">
+    <div class="g-title">3. 普通形＋という＋名詞</div>
+    <div class="g-line"><span class="g-label">【接續】</span>普通形＋という＋名詞</div>
+    <div class="g-line"><span class="g-label">【含義】</span>具體說明後方名詞的內容</div>
+    <div class="g-note">※ 本文用「同じ注文番号の箱がもう一つあるという記録」。</div>
+    </div>
+<div class="g-item">
+    <div class="g-title">4. 普通形＋だろうと思う</div>
+    <div class="g-line"><span class="g-label">【接續】</span>動詞・い形普通形／な形・名詞＋だろうと思う</div>
+    <div class="g-line"><span class="g-label">【含義】</span>委婉表示個人的推測</div>
+    <div class="g-note">※ 本文用「簡単だろうと思っていた」。</div>
+    </div>
+<div class="g-item">
+    <div class="g-title">5. 樣態推測否定</div>
+    <div class="g-line"><span class="g-label">【接續】</span>Vます＋そうにもない／い形語幹＋くなさそう／な形・名詞＋じゃなさそう</div>
+    <div class="g-line"><span class="g-label">【含義】</span>看起來似乎不……或不太可能……</div>
+    <div class="g-note">※ 本文用「運べそうもない」。</div>
+    </div>
+<div class="g-item">
+    <div class="g-title">6. 動詞辭書形＋と</div>
+    <div class="g-line"><span class="g-label">【接續】</span>動詞辭書形＋と、客觀結果</div>
+    <div class="g-line"><span class="g-label">【含義】</span>表示發現、緊接發生或恆常結果</div>
+    <div class="g-note">※ 後項不可使用意志、命令、希望或委託。本文用「開けると、手紙が入っていた」。</div>
+    </div>
+    </div>
+
+    <div class="translation-section">
+      <div class="section-title">中文參考</div>
+      <p>在網購公司上班的第三天，一台以「客戶原因」退回的新款電飯鍋送到了。我以為檢查箱子應該很簡單，打開後卻發現商品上放著一封信：「這不是我訂購的東西。」
+
+上司叫我先核對申請表上的訂單編號和收貨地址，並拜託我在查明原因前不要聯絡退貨的客人。倉庫系統中留有一項紀錄，內容是同一訂單編號還有另一個箱子。
+
+我按照貨架編號尋找，搬完小箱子後，在深處發現一個高到胸口的大箱子，看來根本無法獨自搬動。前輩幫我把它放到地上。裡面不是電飯鍋，而是宣傳用白米和公司的吉祥物人偶裝。
+
+原來是倉庫人員貼錯了訂單標籤。上司笑著說：「是新人發現的嗎？」我想起第一天還以為工作很簡單，也跟著笑了。</p>
+    </div>
+  </div>
+
+  <div class="footer">詞彙來源：日檢完勝對策N3-詞匯（2026-09-03 未複習批次） · 文法來源：Try! N3 1–16（3頁）</div>
+</div>
+</body>
+</html>
