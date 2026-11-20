@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JLPT N3 擬態語與副詞：兩張小貓總複習海報及互動小練習。">
+  <title>JLPT N3 擬態語・副詞總複習</title>
+  <link rel="stylesheet" href="../site-nav.css">
+  <style>
+    :root{--ink:#3d302b;--muted:#756760;--green:#168568;--cream:#fffaf0;--line:#ead7ca;--coral:#ef6d69;--yellow:#ffd66b}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#fff7e8;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","PingFang TC",sans-serif}
+    header{padding:72px 20px 42px;text-align:center;background:linear-gradient(180deg,#bceeff 0,#eaf9e7 75%,#fff7e8 100%)}
+    .badge{display:inline-block;padding:8px 14px;border-radius:999px;background:var(--green);color:#fff;font-weight:800;letter-spacing:.08em}
+    h1{margin:16px 0 10px;font-size:clamp(2rem,6vw,4.5rem);line-height:1.05}header p{margin:0;color:#5f645d;font-size:1.05rem}
+    main{width:min(1500px,calc(100% - 28px));margin:auto;padding:24px 0 80px}.section-title{margin:44px 0 18px;font-size:clamp(1.55rem,3vw,2.25rem)}
+    .poster{position:relative;margin:0 0 28px;overflow:hidden;border:6px solid #fff;border-radius:22px;background:#fff;box-shadow:0 14px 36px #72523824}.poster img{display:block;width:100%;height:auto}.poster a{display:block}
+    .hint{text-align:center;color:var(--muted);font-size:.92rem}.quiz-wrap{padding:clamp(18px,4vw,42px);border:2px solid #f1c6b3;border-radius:24px;background:#fffdf8;box-shadow:0 12px 32px #72523818}
+    .quiz-head{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}.quiz-head p{margin:4px 0 0;color:var(--muted)}
+    .progress{padding:9px 14px;border-radius:999px;background:#e5f7ef;color:#0c6c53;font-weight:800}.questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+    fieldset{margin:0;padding:18px;border:1px solid var(--line);border-radius:16px;background:#fff}legend{padding:0 7px;font-weight:800;line-height:1.5}.num{color:var(--coral)}label{display:block;margin:8px 0;padding:9px 11px;border-radius:10px;background:#fff8ee;cursor:pointer}label:hover{background:#fff0d2}input{margin-right:8px;accent-color:var(--green)}
+    fieldset.correct{border:2px solid #3bae80;background:#f0fff7}fieldset.wrong{border:2px solid #ec7a70;background:#fff5f3}.feedback{min-height:1.4em;margin:10px 0 0;font-size:.9rem;font-weight:700}.correct .feedback{color:#177456}.wrong .feedback{color:#b23d36}
+    .actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:24px}button{border:0;border-radius:999px;padding:13px 22px;background:var(--green);color:#fff;font:inherit;font-size:1rem;font-weight:800;cursor:pointer}button.secondary{background:#eee3d8;color:var(--ink)}button:hover{filter:brightness(.94)}button:focus-visible,.poster a:focus-visible,summary:focus-visible{outline:4px solid #f4b942;outline-offset:4px}#result{font-weight:900;font-size:1.1rem}
+    details{margin-top:28px;border-radius:16px;background:#eef9f4}summary{padding:16px 18px;cursor:pointer;font-weight:900}.word-bank{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 18px 18px}.word-bank span{padding:8px 10px;border-radius:9px;background:#fff}
+    footer{padding:38px 20px;text-align:center;color:var(--muted)}
+    @media(max-width:800px){.questions{grid-template-columns:1fr}.word-bank{grid-template-columns:repeat(2,1fr)}.poster{border-width:3px;border-radius:12px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <a class="return-home" href="../index.html">← 回到首頁</a>
+  <header>
+    <span class="badge">JLPT N3 · 第6週</span>
+    <h1>擬態語・副詞<br>小貓總複習</h1>
+    <p>先看圖像聯想，再做十題小練習。答案不會預先顯示。</p>
+  </header>
+  <main>
+    <h2 class="section-title">海報 ①　ちゃんとがんばっています</h2>
+    <figure class="poster"><a href="../images/jlpt-n3-mimetic-review-1.png" target="_blank" rel="noopener"><img src="../images/jlpt-n3-mimetic-review-1.png" alt="JLPT N3 擬態語與副詞總複習海報一，二十個詞語配小貓插圖"></a></figure>
+    <h2 class="section-title">海報 ②　ますますがんばります</h2>
+    <figure class="poster"><a href="../images/jlpt-n3-mimetic-review-2.png" target="_blank" rel="noopener"><img src="../images/jlpt-n3-mimetic-review-2.png" alt="JLPT N3 擬態語與副詞總複習海報二，十九個詞語配小貓插圖"></a></figure>
+    <p class="hint">點擊海報可開啟原尺寸圖片，方便放大或列印。</p>
+
+    <h2 class="section-title" id="quiz">小練習：選出最自然的詞</h2>
+    <section class="quiz-wrap" aria-labelledby="quiz">
+      <div class="quiz-head"><div><h3>全 10 題</h3><p>全部選好後按「檢查答案」，錯題會顯示提示。</p></div><div class="progress" id="progress">已回答 0 / 10</div></div>
+      <form id="quizForm"><div class="questions" id="questions"></div><div class="actions"><button type="submit">檢查答案</button><button type="button" class="secondary" id="resetBtn">重新作答</button><output id="result" aria-live="polite"></output></div></form>
+      <details><summary>展開完整詞語表（39 組）</summary><div class="word-bank" id="wordBank"></div></details>
+    </section>
+  </main>
+  <footer>毎日少しずつ、どんどん覚えよう。🐾</footer>
+  <script>
+    const quiz=[
+      {q:'宿題があることを（　）忘れてしまった。',a:'うっかり',o:['うっかり','じっと','ざっと'],h:'不留神忘記 → うっかり'},
+      {q:'昨夜は疲れていたので、朝まで（　）眠った。',a:'ぐっすり',o:['はっきり','ぐっすり','そっと'],h:'睡得很熟 → ぐっすり'},
+      {q:'部屋を片づけたら、気分が（　）した。',a:'すっきり',o:['すっきり','がっかり','ぼんやり'],h:'心情清爽 → すっきり'},
+      {q:'赤ちゃんが寝ているので、ドアを（　）閉めた。',a:'そっと',o:['どんどん','そっと','わざと'],h:'輕輕地、不驚動對方 → そっと'},
+      {q:'面接の前は胸が（　）した。',a:'どきどき',o:['ぺこぺこ','どきどき','ぴかぴか'],h:'緊張得心怦怦跳 → どきどき'},
+      {q:'電車に（　）間に合った。',a:'ぎりぎり',o:['まあまあ','ぎりぎり','もともと'],h:'壓線、差一點來不及 → ぎりぎり'},
+      {q:'昼ご飯を食べていないので、おなかが（　）だ。',a:'ぺこぺこ',o:['ぺこぺこ','のろのろ','さまざま'],h:'肚子餓扁了 → ぺこぺこ'},
+      {q:'日本での生活に（　）慣れてきた。',a:'だんだん',o:['たまたま','だんだん','もともと'],h:'漸漸產生變化 → だんだん'},
+      {q:'駅で（　）昔の友達に会った。',a:'たまたま',o:['わざと','たまたま','ますます'],h:'碰巧、偶然 → たまたま'},
+      {q:'質問には（　）答えましょう。',a:'はきはき',o:['ぶつぶつ','はきはき','うろうろ'],h:'說話清楚爽快 → はきはき'}
+    ];
+    const words=['うっかり','すっかり','がっかり','やっぱり／やはり','しっかり','すっきり','さっぱり','ぐっすり','にっこり','そっくり','はっきり','のんびり','ぼんやり','きちんと／ちゃんと','ふと','わざと','ほっと','じっと','ざっと','そっと','どきどき','いらいら','はきはき','ぶつぶつ','うろうろ','ぶらぶら','ぎりぎり','ぴかぴか','のろのろ','べらべら','ぺこぺこ','ますます','だんだん','どんどん','そろそろ','もともと','たまたま','まあまあ','さまざま'];
+    const questions=document.querySelector('#questions');
+    quiz.forEach((item,i)=>{const f=document.createElement('fieldset');f.dataset.answer=item.a;f.innerHTML=`<legend><span class="num">${i+1}.</span> ${item.q}</legend>${item.o.map(v=>`<label><input type="radio" name="q${i}" value="${v}">${v}</label>`).join('')}<p class="feedback" aria-live="polite"></p>`;questions.append(f)});
+    document.querySelector('#wordBank').innerHTML=words.map(w=>`<span>${w}</span>`).join('');
+    const form=document.querySelector('#quizForm'),progress=document.querySelector('#progress');
+    function updateProgress(){progress.textContent=`已回答 ${Array.from(new FormData(form).entries()).length} / ${quiz.length}`}
+    form.addEventListener('change',updateProgress);
+    form.addEventListener('submit',e=>{e.preventDefault();let score=0;[...questions.children].forEach((f,i)=>{const picked=f.querySelector('input:checked');const ok=picked&&picked.value===quiz[i].a;f.className=ok?'correct':'wrong';f.querySelector('.feedback').textContent=ok?'✓ 正確！':`提示：${quiz[i].h}`;if(ok)score++});document.querySelector('#result').textContent=`${score} / ${quiz.length} 題正確`;document.querySelector('#result').scrollIntoView({behavior:'smooth',block:'center'})});
+    document.querySelector('#resetBtn').addEventListener('click',()=>{form.reset();[...questions.children].forEach(f=>{f.className='';f.querySelector('.feedback').textContent=''});document.querySelector('#result').textContent='';updateProgress();window.scrollTo({top:document.querySelector('#quiz').offsetTop-20,behavior:'smooth'})});
+  </script>
+</body>
+</html>
