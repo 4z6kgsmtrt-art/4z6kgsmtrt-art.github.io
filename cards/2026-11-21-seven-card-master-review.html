@@ -35,6 +35,7 @@
       <button class="filter" data-filter="vocab" aria-pressed="false">單詞</button>
       <button class="filter" data-filter="kanji" aria-pressed="false">漢字</button>
       <button class="filter" data-filter="mimetic" aria-pressed="false">擬聲・擬態詞</button>
+      <button class="filter" data-filter="words" aria-pressed="false">詞語分類</button>
       <button class="filter" data-filter="grammar" aria-pressed="false">文法</button>
       <button class="filter" data-filter="poster" aria-pressed="false">只看海報</button>
       <input id="search" class="search" type="search" placeholder="搜尋日文、讀音或中文…" aria-label="搜尋內容">
@@ -50,7 +51,13 @@
 
     <section id="master-list">
       <div class="section-head"><div><div class="eyebrow">Seven-card index</div><h2>七卡重點索引</h2></div><p>以下聚焦考題答案、明確記憶重點與會影響作答的核心詞。讀解中的一般敘述詞與聽解逐字稿的每一個普通詞，不會假裝成獨立考點。</p></div>
-      <div id="master-grid" class="grid"></div>
+      <div id="vocab-area" class="grammar-area">
+        <div class="eyebrow">Words by situation</div>
+        <h3>詞語情境分類</h3>
+        <p class="reading">依使用情境整理；每個詞仍保留「單詞／漢字／擬聲擬態詞」與來源標籤。</p>
+        <div id="vocab-filters" class="grammar-filters" aria-label="詞語細分類"></div>
+        <div id="vocab-groups"></div>
+      </div>
       <div id="grammar-area" class="grammar-area">
         <div class="eyebrow">Grammar by function</div>
         <h3>文法功能分類</h3>
@@ -135,6 +142,24 @@
     ['～ておいてくれますか','','可以請你先做好…嗎？','grammar','L1'],['～始めないと','','不開始…的話','grammar','L1'],['予定でしたが','','原本預定…，但是…','grammar','L1'],['～てもらっている','','一直請某人替我…','grammar','L1'],['Vるところ','','正要做…','grammar','L1'],['～てはいかがですか','','…如何呢？','grammar','L1'],['～ないようにしてください','','請注意不要…','grammar','L1'],
     ['～のに','','明明…卻…；用來…','grammar','L2'],['AよりBのほうが','','比起 A，B 更…','grammar','L2'],['～たり','','列舉動作','grammar','L2'],['～たくて','','因為想要…','grammar','L2'],['～ことはできない','','不能…','grammar','L2'],['～ようになってから','','自從變得會／開始…之後','grammar','L2'],['～気がする','','覺得好像…','grammar','L2'],['～てほしい','','希望別人做…','grammar','L2'],['～がね／～はね','','省略後項，委婉抱怨或保留','grammar','L2']
   ];
+  const vocabGroups=[
+    ['contrast','易混淆詞・近義對比','把意思相近、考試容易混淆的詞放在一起比較'],
+    ['action','動作・固定搭配','動詞、動作方式與常見固定說法'],
+    ['person','人物・身體・情緒狀態','人物特質、身體反應、情緒與生活狀態'],
+    ['home','居家・購物・金錢','住家用品、購物流程、費用與日常金錢'],
+    ['work','學校・工作・申請手續','學習、職場、文件與辦理手續的詞語'],
+    ['travel','交通・移動・場所','搭車、通勤、道路、地點與空間狀態'],
+    ['society','社會・產業・抽象概念','社會制度、產業，以及較抽象的概念詞']
+  ];
+  const vocabMeta={
+    '受け入れる／受け取る':['contrast','新しい考えを受け入れ、受付で資料を受け取った。'],'退屈／つまらない':['contrast','待ち時間が長くて退屈だったし、映画もつまらなかった。'],'せめて／少なくとも':['contrast','せめて十分は話したい。面接には少なくとも十分かかる。'],'暗記する＝覚える':['contrast','試験の前にこの漢字を暗記したので、今でもよく覚えている。'],'決まり＝規則':['contrast','学校の決まりや交通規則を守りましょう。'],'まったく＝ぜんぜん':['contrast','この問題はまったく分からない。答えもぜんぜん思いつかない。'],'輝く＝光る':['contrast','夜空で星が輝き、遠くの灯台も光っている。'],'余る＝残る':['contrast','料理が余ったので、少し冷蔵庫に残しておいた。'],
+    '伝える／お伝えする':['action','先生に予定を伝え、部長には結果をお伝えしました。'],'ぎっしり詰まる':['action','箱の中には本がぎっしり詰まっている。'],'明かりをつける／消す':['action','部屋に入ったら明かりをつけ、寝る前に消します。'],'舐める':['action','猫が自分の足を舐めている。'],'詰める':['action','旅行の荷物をかばんに詰めた。'],'測る':['action','料理を作る前に、材料の重さを測ります。'],'回す':['action','ドアの取っ手を右に回してください。'],'腕を組む':['action','彼は腕を組んで、しばらく考えていた。'],'内緒にする':['action','この話はみんなには内緒にしてください。'],'扱う':['action','この機械は丁寧に扱ってください。'],'呼びかける':['action','警察は住民に注意を呼びかけた。'],'遠慮なく':['action','分からないことがあれば、遠慮なく質問してください。'],
+    '疑う':['person','理由もなく友達を疑ってはいけない。'],'退院':['person','父は来週、病院を退院する予定だ。'],'短気':['person','兄は短気で、すぐ怒ってしまう。'],'あくび／くしゃみ／せき／しゃっくり':['person','眠くてあくびが出たあと、くしゃみとせきが出て、しゃっくりまで始まった。'],'にこにこ':['person','子どもたちはにこにこ笑っている。'],'選手':['person','あの選手は毎日一生懸命練習している。'],'だるい':['person','熱はないが、今日は体がだるい。'],'惜しい':['person','答えはほとんど合っていたので、間違えたのが惜しい。'],'踵／直す':['person','靴の踵が壊れたので、店で直してもらった。'],'世話／生き物／幼稚園':['person','幼稚園の子どもたちは、小さな生き物の世話をしている。'],'にぎやか／騒ぐ':['person','お祭りはにぎやかだが、夜遅くまで騒がないでください。'],
+    '留守':['home','留守の間、隣の人に荷物を預かってもらった。'],'豆':['home','母は豆を入れたスープを作った。'],'自動販売機':['home','駅の自動販売機で水を買った。'],'貸し傘／傘立て':['home','入口の傘立ての横に、貸し傘があります。'],'道具／効果的／貯金／外食':['home','道具を効果的に使い、外食を減らして貯金している。'],'送料／実物／試着':['home','送料を確認してから店へ行き、実物を見て試着した。'],
+    'ヒント':['work','先生からヒントをもらって、問題が解けた。'],'飲料会社':['work','姉は飲料会社で新しい商品を開発している。'],'借りる／予約／発表／原稿':['work','会議室を予約し、発表の原稿を書くために資料を借りた。'],'掃除／指導係／商品／回収':['work','指導係の説明を聞き、売り場を掃除して古い商品を回収した。'],'入門・初級・中級・上級':['work','入門から始め、初級、中級を経て、今は上級で勉強している。'],'証明書／印鑑／申請用紙／利用料金':['work','証明書と印鑑を用意し、申請用紙を出して利用料金を払った。'],'小型':['work','この会社は小型のカメラを開発した。'],
+    '帰宅':['travel','残業を終えて、夜九時に帰宅した。'],'空':['travel','この箱はもう空です。'],'乗車':['travel','電車に乗車する前に、切符を確認してください。'],'空く':['travel','昼を過ぎると店が空き、窓側の席も空いた。'],'がらがら':['travel','朝早い電車はがらがらだった。'],'運転手':['travel','バスの運転手に駅までの道を聞いた。'],'車に酔う':['travel','山道を走ると、車に酔いやすい。'],'定員／混雑／一方通行／改札':['travel','定員を超えて混雑していたので、一方通行の案内に従って改札を出た。'],'通勤／家賃／一人暮らし／出張':['travel','一人暮らしを始め、家賃を払いながら電車で通勤し、月に一度出張する。'],
+    '平等':['society','誰もが平等に教育を受けられる社会が必要だ。'],'産業':['society','観光はこの町の大切な産業です。'],'お互いに':['society','困ったときは、お互いに助け合いましょう。'],'方向':['society','台風は北の方向へ進んでいる。'],'独立':['society','彼は会社を辞めて、独立することにした。'],'共通':['society','二人には音楽が好きだという共通点がある。'],'イメージ':['society','この色には明るいイメージがある。'],'農業が盛ん':['society','この地域は気候が暖かく、農業が盛んだ。'],'消費量':['society','夏は水の消費量が増える。']
+  };
   const grammarGroups=[
     ['time','時間・階段・事前準備','先後順序、階段變化，以及預先完成的動作'],
     ['condition','條件・假設・讓步','「如果／即使／既然」所建立的條件關係'],
@@ -158,20 +183,25 @@
   const statusText={direct:'主考點',cue:'關鍵線索',appear:'出現過'};
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function posterCard(x){const [jp,zh,ex,type,no,status,where]=x;return `<article class="item poster" data-cat="poster ${type.includes('擬')?'mimetic':'vocab'}" data-text="${esc(x.join(' '))}"><span class="reading">${esc(type)}</span><h3>${esc(jp)}</h3><p class="meaning">${esc(zh)}</p><p class="example" lang="ja">${esc(ex)}</p><div class="tags"><span class="tag poster${no}">海報${no==='1'?'①':'②'}</span>${status?`<span class="tag ${status}">${statusText[status]}</span>`:''}</div>${where?`<div class="source">七卡：${esc(where)}</div>`:'<div class="source">七卡中未找到精確命中</div>'}</article>`}
-  function masterCard(x){const [jp,reading,zh,cat,src]=x;const label={vocab:'單詞',kanji:'漢字',mimetic:'擬聲・擬態詞'}[cat];return `<article class="item" data-cat="${cat}" data-text="${esc(x.join(' '))}"><span class="reading">${esc(reading||label)}</span><h3>${esc(jp)}</h3><p class="meaning">${esc(zh)}</p><div class="tags"><span class="tag">${label}</span>${src.split('・').map(s=>`<span class="tag">${esc(sources[s]||s)}</span>`).join('')}</div></article>`}
+  function vocabCard(x){const [jp,reading,zh,cat,src]=x;const label={vocab:'單詞',kanji:'漢字',mimetic:'擬聲・擬態詞'}[cat];const [group,example]=vocabMeta[jp];return `<article class="item" data-cat="words ${cat}" data-vocab-group="${group}" data-text="${esc(x.join(' ')+' '+example)}"><span class="reading">${esc(reading||label)}</span><h3>${esc(jp)}</h3><p class="meaning">${esc(zh)}</p><p class="jp-example" lang="ja">例：${esc(example)}</p><div class="tags"><span class="tag">${label}</span>${src.split('・').map(s=>`<span class="tag">${esc(sources[s]||s)}</span>`).join('')}</div></article>`}
   function grammarCard(x){const [jp,reading,zh,,src]=x;const [group,example]=grammarMeta[jp];return `<article class="item" data-cat="grammar" data-group="${group}" data-text="${esc(x.join(' ')+' '+example)}"><span class="reading">${esc(reading||'文法')}</span><h3>${esc(jp)}</h3><p class="meaning">${esc(zh)}</p><p class="jp-example" lang="ja">例：${esc(example)}</p><div class="tags">${src.split('・').map(s=>`<span class="tag">${esc(sources[s]||s)}</span>`).join('')}</div></article>`}
   document.querySelector('#poster-grid').innerHTML=posters.map(posterCard).join('');
   const grammarItems=master.filter(x=>x[3]==='grammar');
-  document.querySelector('#master-grid').innerHTML=master.filter(x=>x[3]!=='grammar').map(masterCard).join('');
-  document.querySelector('#grammar-filters').innerHTML=`<button class="subfilter active" data-group="all" aria-pressed="true">全部文法</button>`+grammarGroups.map(([id,title])=>`<button class="subfilter" data-group="${id}" aria-pressed="false">${title}</button>`).join('');
+  const vocabItems=master.filter(x=>x[3]!=='grammar');
+  document.querySelector('#vocab-filters').innerHTML=`<button class="subfilter vocab-subfilter active" data-vocab-filter="all" aria-pressed="true">全部詞語</button>`+vocabGroups.map(([id,title])=>`<button class="subfilter vocab-subfilter" data-vocab-filter="${id}" aria-pressed="false">${title}</button>`).join('');
+  document.querySelector('#vocab-groups').innerHTML=vocabGroups.map(([id,title,note],i)=>{const items=vocabItems.filter(x=>vocabMeta[x[0]][0]===id);return `<details class="grammar-group vocab-group" data-vocab-box="${id}" ${i===0?'open':''}><summary>${title}<span>${items.length} 個</span></summary><p class="group-note">${note}</p><div class="grid">${items.map(vocabCard).join('')}</div></details>`}).join('');
+  document.querySelector('#grammar-filters').innerHTML=`<button class="subfilter grammar-subfilter active" data-grammar-filter="all" aria-pressed="true">全部文法</button>`+grammarGroups.map(([id,title])=>`<button class="subfilter grammar-subfilter" data-grammar-filter="${id}" aria-pressed="false">${title}</button>`).join('');
   document.querySelector('#grammar-groups').innerHTML=grammarGroups.map(([id,title,note],i)=>{const items=grammarItems.filter(x=>grammarMeta[x[0]][0]===id);return `<details class="grammar-group" data-group-box="${id}" ${i===0?'open':''}><summary>${title}<span>${items.length} 個</span></summary><p class="group-note">${note}</p><div class="grid">${items.map(grammarCard).join('')}</div></details>`}).join('');
-  let active='all',activeGroup='all'; const search=document.querySelector('#search');
+  let active='all',activeGroup='all',activeVocabGroup='all'; const search=document.querySelector('#search');
   function setMainFilter(name){document.querySelectorAll('.filter').forEach(x=>{const on=x.dataset.filter===name;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on))});active=name}
-  function setGroupFilter(name){document.querySelectorAll('.subfilter').forEach(x=>{const on=x.dataset.group===name;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on))});activeGroup=name}
-  function apply(){const q=search.value.trim().toLowerCase();let shown=0;document.querySelectorAll('.item').forEach(el=>{const cats=el.dataset.cat.split(' ');const inSection=active==='all'||cats.includes(active);const inGroup=!cats.includes('grammar')||activeGroup==='all'||el.dataset.group===activeGroup;const found=!q||el.dataset.text.toLowerCase().includes(q);el.hidden=!(inSection&&inGroup&&found);if(!el.hidden)shown++});const grammarMode=active==='all'||active==='grammar';document.querySelector('#grammar-area').hidden=!grammarMode;document.querySelectorAll('.grammar-group').forEach(box=>{const visible=[...box.querySelectorAll('.item')].some(x=>!x.hidden);box.hidden=!grammarMode||!visible;if(visible&&(q||activeGroup!=='all'))box.open=true});document.querySelector('#empty').style.display=shown?'none':'block';document.querySelector('#result-status').textContent=`顯示 ${shown} 個項目`}
-  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{setMainFilter(btn.dataset.filter);setGroupFilter('all');apply();if(active==='poster')document.querySelector('#poster-overview').scrollIntoView({behavior:'smooth'});if(active==='grammar')document.querySelector('#grammar-area').scrollIntoView({behavior:'smooth'})}));
-  document.querySelectorAll('.subfilter').forEach(btn=>btn.addEventListener('click',()=>{setMainFilter('grammar');setGroupFilter(btn.dataset.group);apply()}));
+  function setGrammarGroup(name){document.querySelectorAll('.grammar-subfilter').forEach(x=>{const on=x.dataset.grammarFilter===name;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on))});activeGroup=name}
+  function setVocabGroup(name){document.querySelectorAll('.vocab-subfilter').forEach(x=>{const on=x.dataset.vocabFilter===name;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on))});activeVocabGroup=name}
+  function apply(){const q=search.value.trim().toLowerCase();let shown=0;document.querySelectorAll('.item').forEach(el=>{const cats=el.dataset.cat.split(' ');const inSection=active==='all'||cats.includes(active);const inGrammarGroup=!cats.includes('grammar')||activeGroup==='all'||el.dataset.group===activeGroup;const inVocabGroup=!cats.includes('words')||activeVocabGroup==='all'||el.dataset.vocabGroup===activeVocabGroup;const found=!q||el.dataset.text.toLowerCase().includes(q);el.hidden=!(inSection&&inGrammarGroup&&inVocabGroup&&found);if(!el.hidden)shown++});const grammarMode=active==='all'||active==='grammar';const vocabMode=['all','words','vocab','kanji','mimetic'].includes(active);document.querySelector('#grammar-area').hidden=!grammarMode;document.querySelector('#vocab-area').hidden=!vocabMode;document.querySelectorAll('#grammar-groups .grammar-group').forEach(box=>{const visible=[...box.querySelectorAll('.item')].some(x=>!x.hidden);box.hidden=!grammarMode||!visible;if(visible&&(q||activeGroup!=='all'))box.open=true});document.querySelectorAll('#vocab-groups .vocab-group').forEach(box=>{const visible=[...box.querySelectorAll('.item')].some(x=>!x.hidden);box.hidden=!vocabMode||!visible;if(visible&&(q||activeVocabGroup!=='all'||active!=='all'))box.open=true});document.querySelector('#empty').style.display=shown?'none':'block';document.querySelector('#result-status').textContent=`顯示 ${shown} 個項目`}
+  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{setMainFilter(btn.dataset.filter);setGrammarGroup('all');setVocabGroup('all');apply();if(active==='poster')document.querySelector('#poster-overview').scrollIntoView({behavior:'smooth'});if(active==='grammar')document.querySelector('#grammar-area').scrollIntoView({behavior:'smooth'});if(active==='words')document.querySelector('#vocab-area').scrollIntoView({behavior:'smooth'})}));
+  document.querySelectorAll('.grammar-subfilter').forEach(btn=>btn.addEventListener('click',()=>{setMainFilter('grammar');setGrammarGroup(btn.dataset.grammarFilter);setVocabGroup('all');apply()}));
+  document.querySelectorAll('.vocab-subfilter').forEach(btn=>btn.addEventListener('click',()=>{setMainFilter('words');setVocabGroup(btn.dataset.vocabFilter);setGrammarGroup('all');apply()}));
   search.addEventListener('input',apply);
+  apply();
   </script>
 </body>
 </html>
