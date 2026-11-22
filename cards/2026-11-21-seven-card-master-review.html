@@ -19,7 +19,7 @@
   <header class="hero wrap">
     <div class="eyebrow">JLPT N3 · 歷屆試題錯題精讀</div>
     <h1>7 卡錯題<br>總複習</h1>
-    <p class="lead">把七張錯題卡中的核心單詞、漢字、擬聲・擬態詞與文法放在同一頁。兩張小貓海報的 39 個詞也全部收錄，並清楚標出哪些真的曾在錯題卡中出現。</p>
+    <p class="lead">把七張錯題卡中的核心單詞、漢字、擬聲・擬態詞與文法放在同一頁，並列出兩張小貓海報中真正曾在錯題卡出現的 13 個詞。</p>
     <div class="stats">
       <div class="stat"><strong>7</strong>張錯題卡</div>
       <div class="stat"><strong>39</strong>個海報詞</div>
@@ -185,7 +185,7 @@
   function posterCard(x){const [jp,zh,ex,type,no,status,where]=x;return `<article class="item poster" data-cat="poster ${type.includes('擬')?'mimetic':'vocab'}" data-text="${esc(x.join(' '))}"><span class="reading">${esc(type)}</span><h3>${esc(jp)}</h3><p class="meaning">${esc(zh)}</p><p class="example" lang="ja">${esc(ex)}</p><div class="tags"><span class="tag poster${no}">海報${no==='1'?'①':'②'}</span>${status?`<span class="tag ${status}">${statusText[status]}</span>`:''}</div>${where?`<div class="source">七卡：${esc(where)}</div>`:'<div class="source">七卡中未找到精確命中</div>'}</article>`}
   function vocabCard(x){const [jp,reading,zh,cat,src]=x;const label={vocab:'單詞',kanji:'漢字',mimetic:'擬聲・擬態詞'}[cat];const [group,example]=vocabMeta[jp];return `<article class="item" data-cat="words ${cat}" data-vocab-group="${group}" data-text="${esc(x.join(' ')+' '+example)}"><span class="reading">${esc(reading||label)}</span><h3>${esc(jp)}</h3><p class="meaning">${esc(zh)}</p><p class="jp-example" lang="ja">例：${esc(example)}</p><div class="tags"><span class="tag">${label}</span>${src.split('・').map(s=>`<span class="tag">${esc(sources[s]||s)}</span>`).join('')}</div></article>`}
   function grammarCard(x){const [jp,reading,zh,,src]=x;const [group,example]=grammarMeta[jp];return `<article class="item" data-cat="grammar" data-group="${group}" data-text="${esc(x.join(' ')+' '+example)}"><span class="reading">${esc(reading||'文法')}</span><h3>${esc(jp)}</h3><p class="meaning">${esc(zh)}</p><p class="jp-example" lang="ja">例：${esc(example)}</p><div class="tags">${src.split('・').map(s=>`<span class="tag">${esc(sources[s]||s)}</span>`).join('')}</div></article>`}
-  document.querySelector('#poster-grid').innerHTML=posters.map(posterCard).join('');
+  document.querySelector('#poster-grid').innerHTML=posters.filter(x=>x[5]).map(posterCard).join('');
   const grammarItems=master.filter(x=>x[3]==='grammar');
   const vocabItems=master.filter(x=>x[3]!=='grammar');
   document.querySelector('#vocab-filters').innerHTML=`<button class="subfilter vocab-subfilter active" data-vocab-filter="all" aria-pressed="true">全部詞語</button>`+vocabGroups.map(([id,title])=>`<button class="subfilter vocab-subfilter" data-vocab-filter="${id}" aria-pressed="false">${title}</button>`).join('');
